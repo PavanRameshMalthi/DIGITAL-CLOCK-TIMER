@@ -157,8 +157,11 @@ document.documentElement.setAttribute('data-theme', 'light');
 👨‍💻 Author
 
 Name: MALTHI PAVAN RAMESH
+
 Project: Interactive Digital Clock & Timer
+
 Built with: HTML, CSS & JavaScript
+
 Skills Demonstrated: setInterval, DOM Manipulation, CSS Variables, Responsive Design
 
 ---
