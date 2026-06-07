@@ -1,0 +1,501 @@
+/* ============================================================
+   CSS VARIABLES — Dark & Light Theme
+   ============================================================ */
+:root[data-theme="dark"] {
+  --bg: #0d0f1a;
+  --card-bg: #131627;
+  --card-border: #1e2240;
+  --card-hover: #181c35;
+  --text-primary: #e8eaf6;
+  --text-secondary: #8892b0;
+  --text-muted: #4a5568;
+  --clock-color: #c084fc;
+  --stopwatch-color: #4ade80;
+  --timer-color: #38bdf8;
+  --btn-start: #22c55e;
+  --btn-pause: #f59e0b;
+  --btn-stop: #ef4444;
+  --btn-reset: #6b7280;
+  --toggle-bg: #4f46e5;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --glow-clock: rgba(192, 132, 252, 0.15);
+  --glow-sw: rgba(74, 222, 128, 0.15);
+  --glow-timer: rgba(56, 189, 248, 0.15);
+  --feat-bg: #0f1220;
+  --ms-color: #4ade80;
+}
+
+:root[data-theme="light"] {
+  --bg: #f0f4ff;
+  --card-bg: #ffffff;
+  --card-border: #d1d9f0;
+  --card-hover: #f8faff;
+  --text-primary: #1a1f3a;
+  --text-secondary: #4a5568;
+  --text-muted: #9ba3b8;
+  --clock-color: #7c3aed;
+  --stopwatch-color: #16a34a;
+  --timer-color: #0284c7;
+  --btn-start: #16a34a;
+  --btn-pause: #d97706;
+  --btn-stop: #dc2626;
+  --btn-reset: #6b7280;
+  --toggle-bg: #4f46e5;
+  --shadow: rgba(0, 0, 0, 0.15);
+  --glow-clock: rgba(124, 58, 237, 0.1);
+  --glow-sw: rgba(22, 163, 74, 0.1);
+  --glow-timer: rgba(2, 132, 199, 0.1);
+  --feat-bg: #e8eeff;
+  --ms-color: #16a34a;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background 0.4s, color 0.4s;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(56, 189, 248, 0.04) 0%, transparent 50%);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  text-align: center;
+  padding: 36px 20px 20px;
+  position: relative;
+}
+
+header h1 {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #c084fc 0%, #818cf8 40%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   THEME TOGGLE BUTTON
+   ============================================================ */
+.theme-toggle {
+  position: absolute;
+  top: 28px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 30px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.theme-toggle:hover {
+  border-color: var(--toggle-bg);
+}
+
+.toggle-icon {
+  font-size: 1rem;
+}
+
+.toggle-switch {
+  width: 36px;
+  height: 20px;
+  background: var(--toggle-bg);
+  border-radius: 10px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.3s;
+}
+
+[data-theme="light"] .toggle-switch::after {
+  transform: translateX(-16px);
+}
+
+/* ============================================================
+   MAIN GRID
+   ============================================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  padding: 0 20px;
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: background 0.4s, border-color 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 40px var(--shadow);
+}
+
+.card-clock {
+  border-color: rgba(192, 132, 252, 0.35);
+  box-shadow: 0 0 30px var(--glow-clock);
+}
+
+.card-sw {
+  border-color: rgba(74, 222, 128, 0.35);
+  box-shadow: 0 0 30px var(--glow-sw);
+}
+
+.card-timer {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 30px var(--glow-timer);
+}
+
+/* ── Card Title ── */
+.card-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--card-border);
+  width: 100%;
+  padding-bottom: 14px;
+  justify-content: center;
+}
+
+.card-clock .card-title  { color: var(--clock-color); }
+.card-sw    .card-title  { color: var(--stopwatch-color); }
+.card-timer .card-title  { color: var(--timer-color); }
+
+.title-icon {
+  font-size: 1.2rem;
+}
+
+/* ============================================================
+   DISPLAY NUMBERS
+   ============================================================ */
+.display {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 1;
+}
+
+.clock-display {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  color: var(--clock-color);
+  text-shadow: 0 0 20px rgba(192, 132, 252, 0.4);
+}
+
+.clock-ampm {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+.clock-date {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.sw-display {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: var(--text-primary);
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
+}
+
+.sw-ms {
+  font-size: 1.6rem;
+  color: var(--ms-color);
+}
+
+.timer-display {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  color: var(--timer-color);
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.timer-display.danger {
+  color: #ef4444;
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  animation: pulse-red 0.5s infinite alternate;
+}
+
+@keyframes pulse-red {
+  from { opacity: 1; }
+  to   { opacity: 0.6; }
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  min-width: 80px;
+  justify-content: center;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+  box-shadow: 0 4px 14px var(--shadow);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.btn-start { background: var(--btn-start); color: #fff; }
+.btn-pause { background: var(--btn-pause); color: #fff; }
+.btn-stop  { background: var(--btn-stop);  color: #fff; }
+.btn-reset { background: var(--btn-reset); color: #fff; }
+
+/* ============================================================
+   SET TIME (Countdown Spinner)
+   ============================================================ */
+.set-time-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.set-time-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.time-input-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.time-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.spinner-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  transition: color 0.2s, background 0.2s;
+  line-height: 1;
+}
+
+.spinner-btn:hover {
+  color: var(--timer-color);
+  background: var(--card-hover);
+}
+
+.spinner-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 4px 8px;
+  min-width: 44px;
+  text-align: center;
+}
+
+.set-time-colon {
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+  padding-bottom: 16px;
+}
+
+.set-time-unit {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* ============================================================
+   FEATURES SECTION
+   ============================================================ */
+.features-section {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  padding: 0 20px;
+}
+
+.features-card {
+  background: var(--feat-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px 32px;
+}
+
+.features-card h2 {
+  text-align: center;
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.feat-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.feat-body h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.feat-clock h3 { color: var(--clock-color); }
+.feat-sw    h3 { color: var(--stopwatch-color); }
+.feat-timer h3 { color: var(--timer-color); }
+.feat-dark  h3 { color: #f59e0b; }
+
+.feat-body p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  text-align: center;
+  padding: 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  border-top: 1px solid var(--card-border);
+}
+
+footer span {
+  color: #ef4444;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .theme-toggle {
+    top: 14px;
+    right: 14px;
+    font-size: 0.75rem;
+  }
+  header {
+    padding-top: 60px;
+  }
+}
